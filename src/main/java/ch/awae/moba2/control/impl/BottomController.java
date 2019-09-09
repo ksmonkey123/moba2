@@ -31,8 +31,8 @@ public class BottomController implements Controller {
                 provider.button("track[9]"), provider.button("track[10]"), null, null,
                 provider.button("exit.left"), provider.button("exit.right"));
 
-        leftPaths = pathProvider.getPaths("bottom.01", "bottom.02", "bottom.03", "bottom.04", "bottom.05",
-                "bottom.06", "bottom.07", "bottom.08", "bottom.09", "bottom.10");
+        leftPaths = pathProvider.getPaths("bottom.l1", "bottom.l2", "bottom.l3", "bottom.l4", "bottom.l5",
+                "bottom.l6", "bottom.l7", "bottom.l8", "bottom.l9", "bottom.l10");
         rightPaths = pathProvider.getPaths("bottom.r2", "bottom.r3", "bottom.r4", "bottom.r5");
         clearPath = pathProvider.getPath("bottom.clear");
     }

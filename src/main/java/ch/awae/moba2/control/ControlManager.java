@@ -8,15 +8,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ControlThread {
+public class ControlManager {
 
     private List<Controller> controllers;
 
-    public ControlThread(ApplicationContext context) {
+    public ControlManager(ApplicationContext context) {
         controllers = new ArrayList<>(context.getBeansOfType(Controller.class).values());
     }
 
-    @Scheduled(fixedRate = 50)
+    @Scheduled(fixedDelay = 50)
     public void tick() {
         controllers.forEach(Controller::tick);
     }
