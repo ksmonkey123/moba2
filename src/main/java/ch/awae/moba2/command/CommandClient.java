@@ -23,4 +23,9 @@ public class CommandClient {
         log.info(String.format("sending switch command to sector %s: %s", sector, switchCommand));
         http.postForObject(configuration.getHost() + "switch/" + sector.name(), switchCommand, Object.class);
     }
+
+    public void sendLightCommand(LightCommand lightCommand) {
+        log.info(String.format("sending light command: %s", lightCommand));
+        http.postForObject(configuration.getHost() + "lights", lightCommand, Object.class);
+    }
 }
