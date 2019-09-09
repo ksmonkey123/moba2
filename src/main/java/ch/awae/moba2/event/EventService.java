@@ -1,5 +1,6 @@
 package ch.awae.moba2.event;
 
+import ch.awae.moba2.buttons.ButtonRegistry;
 import ch.awae.moba2.config.ProxyConfiguration;
 import lombok.extern.java.Log;
 import org.springframework.core.ParameterizedTypeReference;
@@ -9,23 +10,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.function.Consumer;
 
 @Log
 @Service
 class EventService {
 
-    private final List<Consumer<Event>> consumers = Collections.synchronizedList(new ArrayList<>());
+    private final ButtonRegistry buttonRegistry;
     private Flux<ServerSentEvent<Event>> eventStream;
     private long lastSetup = 0;
 
     private final ProxyConfiguration proxyConfiguration;
 
-    public EventService(ProxyConfiguration proxyConfiguration) {
+    public EventService(ProxyConfiguration proxyConfiguration, ButtonRegistry buttonRegistry) {
         this.proxyConfiguration = proxyConfiguration;
+        this.buttonRegistry = buttonRegistry;
     }
 
     @PostConstruct
@@ -73,15 +71,8 @@ class EventService {
     }
 
     private void onEvent(Event event) {
-        synchronized (consumers) {
-            for (Consumer<Event> consumer : consumers) {
-                consumer.accept(event);
-            }
-        }
-    }
-
-    public void register(Consumer<Event> consumer) {
-        consumers.add(consumer);
+        System.out.println(event);
+        buttonRegistry.setButtons(event.getSector(), event.getInput());
     }
 
 }

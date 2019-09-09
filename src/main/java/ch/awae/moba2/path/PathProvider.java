@@ -47,4 +47,12 @@ public class PathProvider {
         // create path
         return new Path(key, sector, mask, data);
     }
+
+    public Path[] getPaths(String... keys) {
+        Path[] paths = new Path[keys.length];
+        for (int i = 0; i < keys.length; i++) {
+            paths[i] = getPath(keys[i]);
+        }
+        return paths;
+    }
 }

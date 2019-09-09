@@ -1,13 +1,16 @@
 package ch.awae.moba2.event;
 
+import ch.awae.moba2.Sector;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Setter
+@Getter
 @ToString
-public class Event {
+class Event {
     private long id;
     private long timestamp;
-    private String sector;
+    private Sector sector;
     private int input;
 }
