@@ -14,3 +14,37 @@ bottom:
     left: 1024
     right: 2048
   clear: 0x8000
+
+center:
+  clear: 0x100
+  buttons: 0xff
+  switch:
+    0:
+      a: 1
+      b: 2
+      group: 0x03
+    1:
+      a: 4
+      b: 8
+      group: 0x0c
+    2:
+      a: 16
+      b: 32
+    3:
+      a: 64
+      b: 128
+      group: 0xc0
+
+left:
+  track:
+    1: 0x0100
+    2: 0x0002
+    3: 0x0004
+    4: 0x0008
+  path:
+    A: 0x0010
+    B: 0x0020
+    C: 0x0040
+  clear: 0x0080
+  paths: 0x0070
+  tracks: 0x010e

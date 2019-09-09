@@ -71,7 +71,6 @@ class EventService {
     }
 
     private void onEvent(Event event) {
-        System.out.println(event);
         buttonRegistry.setButtons(event.getSector(), event.getInput());
     }
 

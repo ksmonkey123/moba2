@@ -1,6 +1,8 @@
 package ch.awae.moba2.path;
 
 import ch.awae.moba2.Sector;
+import ch.awae.moba2.command.CommandClient;
+import ch.awae.moba2.command.SwitchCommand;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -9,7 +11,25 @@ import java.util.List;
 @Component
 public class PathRegistry {
 
+    private final CommandClient commandClient;
     private ArrayList<Path> paths = new ArrayList<>();
+
+    public PathRegistry(CommandClient commandClient) {
+        this.commandClient = commandClient;
+    }
+
+    private void pushUpdate(Sector sector) {
+        List<Path> paths = getPaths(sector);
+
+        int data = 0;
+        for (Path path : paths) {
+            data += path.getData();
+        }
+        int display = (data >> 8) & 0x0000ffff;
+        int command = data & 0x000000ff;
+
+        commandClient.sendSwitchCommand(sector, new SwitchCommand(command, display));
+    }
 
     public void register(Path... paths) {
         for (Path path : paths) {
@@ -29,7 +49,7 @@ public class PathRegistry {
             }
         }
         this.paths.add(path);
-
+        pushUpdate(path.getSector());
     }
 
     public List<Path> getAllPaths() {
@@ -43,7 +63,9 @@ public class PathRegistry {
     }
 
     public void unregister(Path path) {
-        this.paths.remove(path);
+        if (this.paths.remove(path)) {
+            pushUpdate(path.getSector());
+        }
     }
 
     public List<Path> getPaths(Sector sector) {
