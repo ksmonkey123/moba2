@@ -48,3 +48,19 @@ left:
   clear: 0x0080
   paths: 0x0070
   tracks: 0x010e
+
+right:
+  track:
+    all: 15
+    1: 1
+    2: 2
+    3: 4
+    4: 8
+  path:
+    all: 0x0030
+    A: 16
+    B: 32
+  clear:
+    all: 192
+    A: 64
+    B: 128
