@@ -21,6 +21,10 @@ public class LightProvider {
         this.properties = loader.load("lights.yml");
     }
 
+    public Light getLight(int chip, int pin) {
+        return new LightImpl(chip, pin, model);
+    }
+
     public Light getLight(String id) {
         List<Light> lights = this.properties.stringPropertyNames()
                 .stream()

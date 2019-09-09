@@ -12,14 +12,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class LightController implements Controller {
 
-    private Light all, roads;
+    private Light all;
     private Logic allOff, allOn;
 
     public LightController(ButtonProvider buttonProvider, LightProvider provider) {
         SectorButtonProvider buttons = buttonProvider.sector(Sector.LIGHTS);
 
         all = provider.getLight("all");
-        roads = provider.getLight("roads");
 
         allOff = buttons.button("light[1]").edge();
         allOn = buttons.button("light[2]").edge();
