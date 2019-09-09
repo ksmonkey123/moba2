@@ -1,5 +1,6 @@
 package ch.awae.moba2.event;
 
+import ch.awae.moba2.ProxyConfiguration;
 import lombok.extern.java.Log;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
@@ -21,6 +22,12 @@ class EventServiceImpl implements EventService {
     private Flux<ServerSentEvent<Event>> eventStream;
     private long lastSetup = 0;
 
+    private final ProxyConfiguration proxyConfiguration;
+
+    public EventServiceImpl(ProxyConfiguration proxyConfiguration) {
+        this.proxyConfiguration = proxyConfiguration;
+    }
+
     @PostConstruct
     private synchronized void init() {
         backoff();
@@ -30,7 +37,7 @@ class EventServiceImpl implements EventService {
         }
 
         log.info("initialising new SSE event stream");
-        WebClient client = WebClient.create("http://localhost:8088/");
+        WebClient client = WebClient.create(proxyConfiguration.getHost());
 
         ParameterizedTypeReference<ServerSentEvent<Event>> type =
                 new ParameterizedTypeReference<ServerSentEvent<Event>>() {
@@ -66,6 +73,7 @@ class EventServiceImpl implements EventService {
     }
 
     private void onEvent(Event event) {
+        System.out.println(event);
         synchronized (consumers) {
             for (Consumer<Event> consumer : consumers) {
                 consumer.accept(event);

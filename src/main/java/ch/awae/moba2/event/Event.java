@@ -6,5 +6,8 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Event {
+    private long id;
     private long timestamp;
+    private String sector;
+    private int input;
 }
