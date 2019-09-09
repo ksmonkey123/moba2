@@ -19,7 +19,11 @@ public class PathProvider {
     }
 
     public Path getPath(String key) {
-        return path_map.get(key);
+        Path path = path_map.get(key);
+        if (path == null) {
+            throw new IllegalArgumentException("unknown path key: " + key);
+        }
+        return path;
     }
 
 
