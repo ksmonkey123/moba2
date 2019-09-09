@@ -1,4 +1,4 @@
-package ch.awae.moba2;
+package ch.awae.moba2.config;
 
 import lombok.Getter;
 import lombok.Setter;

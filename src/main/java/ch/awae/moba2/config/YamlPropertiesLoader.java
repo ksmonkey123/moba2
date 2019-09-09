@@ -11,9 +11,9 @@ import java.util.List;
 import java.util.Properties;
 
 @Component
-public final class ConfigLoader {
+public final class YamlPropertiesLoader {
 
-    public Props load(String file) throws IOException {
+    public Properties load(String file) throws IOException {
         List<PropertySource<?>> yml = new YamlPropertySourceLoader().load(null, new ClassPathResource(file));
 
         Properties properties = new Properties();
@@ -29,7 +29,7 @@ public final class ConfigLoader {
                 throw new UnsupportedOperationException("can only load map property sources");
             }
         }
-        return new Props(properties);
+        return properties;
     }
 
 }

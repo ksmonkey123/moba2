@@ -1,5 +1,0 @@
-int data = 0;
-for (Path p : Model.getActivePaths(sector)) {
-	data += p.data;
-}
-host.write((short) ((data >> 8) & 0x0000ffff), (byte) (data & 0x000000ff));

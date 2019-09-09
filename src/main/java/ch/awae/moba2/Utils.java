@@ -1,36 +1,8 @@
 package ch.awae.moba2;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Objects;
-import java.util.Properties;
 
-/**
- * Collection of utility methods
- *
- * @author Andreas Wälchli
- */
 public final class Utils {
-
-    /**
-     * Reads a properties file
-     *
-     * @param file the file to read
-     * @return the properties
-     * @throws IllegalArgumentException if the {@code file} could not be located
-     * @throws IOException              if an error occurred while reading the file
-     */
-    public static Properties getProperties(String file) throws IOException {
-        try (InputStream in = Utils.class.getClassLoader()
-                .getResourceAsStream("resources/" + file)) {
-            if (in == null)
-                throw new IllegalArgumentException("file not found: resources/" + file);
-
-            Properties p = new Properties();
-            p.load(in);
-            return p;
-        }
-    }
 
     /**
      * Parses a String into a signed integer.

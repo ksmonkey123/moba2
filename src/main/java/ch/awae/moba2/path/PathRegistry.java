@@ -1,5 +1,6 @@
-package ch.awae.moba2;
+package ch.awae.moba2.path;
 
+import ch.awae.moba2.Sector;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -28,6 +29,7 @@ public class PathRegistry {
             }
         }
         this.paths.add(path);
+
     }
 
     public List<Path> getAllPaths() {
@@ -41,13 +43,13 @@ public class PathRegistry {
     }
 
     public void unregister(Path path) {
-      this.paths.remove(path);
+        this.paths.remove(path);
     }
 
     public List<Path> getPaths(Sector sector) {
         List<Path> result = new ArrayList<>();
         for (Path p : this.paths)
-            if (p.sector == sector)
+            if (p.getSector() == sector)
                 result.add(p);
         return result;
     }
