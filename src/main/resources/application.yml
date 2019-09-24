@@ -2,4 +2,4 @@ server:
   port: 8080
 
 proxy:
-  host: http://192.168.1.201:8088/
+  host: http://localhost:8088/
