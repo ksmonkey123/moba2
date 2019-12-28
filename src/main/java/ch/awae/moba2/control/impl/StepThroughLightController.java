@@ -20,9 +20,9 @@ public class StepThroughLightController implements Controller {
     public StepThroughLightController(LightProvider lightProvider, ButtonProvider buttonProvider) {
         this.lightProvider = lightProvider;
 
-        this.start = buttonProvider.getButton(Sector.LIGHTS, "light[13]").edge();
-        this.previous = buttonProvider.getButton(Sector.LIGHTS, "light[14]").edge();
-        this.next = buttonProvider.getButton(Sector.LIGHTS, "light[15]").edge();
+        this.start = buttonProvider.getButton(Sector.LIGHTS, "light[3]").edge();
+        this.previous = buttonProvider.getButton(Sector.LIGHTS, "light[4]").edge();
+        this.next = buttonProvider.getButton(Sector.LIGHTS, "light[5]").edge();
     }
 
     @Override
