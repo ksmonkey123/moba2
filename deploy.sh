@@ -5,7 +5,7 @@ mvn -U clean package
 echo "done!"
 
 echo "installing on host..."
-cd target
+cd target || exit
 scp *.jar othala:~/moba-core.jar
 echo "done!"
 echo
