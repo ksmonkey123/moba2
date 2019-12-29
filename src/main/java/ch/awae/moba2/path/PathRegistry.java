@@ -6,6 +6,7 @@ import ch.awae.moba2.command.SwitchCommand;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 @Component
@@ -56,19 +57,7 @@ public class PathRegistry {
         return new ArrayList<>(paths);
     }
 
-    public void unregister(Path... paths) {
-        for (Path path : paths) {
-            unregister(path);
-        }
-    }
-
-    public void unregister(Path path) {
-        if (this.paths.remove(path)) {
-            pushUpdate(path.getSector());
-        }
-    }
-
-    public List<Path> getPaths(Sector sector) {
+    private List<Path> getPaths(Sector sector) {
         List<Path> result = new ArrayList<>();
         for (Path p : this.paths)
             if (p.getSector() == sector)
@@ -76,10 +65,9 @@ public class PathRegistry {
         return result;
     }
 
-    public boolean isRegistered(Path p) {
-        if (p == null)
-            return false;
-        return this.paths.contains(p);
+    public void registerAll(Collection<Path> paths) {
+        for (Path path : paths) {
+            this.register(path);
+        }
     }
-
 }
