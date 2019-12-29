@@ -46,11 +46,14 @@ public class PathPersistenceController implements Controller {
     public void tick() {
         if (saveButton.evaluate()) {
             saveTimeout.start();
+            return;
         }
+
+        boolean saving = saveTimeout.evaluate();
 
         for (int i = 0; i < slotButtons.length; i++) {
             if (slotButtons[i].evaluate()) {
-                if (saveTimeout.evaluate()) {
+                if (saving) {
                     saveTimeout.stop();
                     handleSave(i);
                 } else {
