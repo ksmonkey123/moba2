@@ -26,8 +26,7 @@ public class Timeout implements Logic {
      * @param millis the timeout period in milliseconds
      */
     public Timeout(long millis) {
-        this(millis, () -> {
-        });
+        this(millis, null);
     }
 
     /**
@@ -65,7 +64,9 @@ public class Timeout implements Logic {
             return true;
         } else {
             lastSet = -1;
-            onTimeout.run();
+            if (onTimeout != null) {
+                onTimeout.run();
+            }
             return false;
         }
     }
