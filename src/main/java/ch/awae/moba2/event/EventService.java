@@ -1,8 +1,10 @@
 package ch.awae.moba2.event;
 
 import ch.awae.moba2.buttons.ButtonRegistry;
+import ch.awae.moba2.command.ProxyWarmUpService;
 import ch.awae.moba2.config.ProxyConfiguration;
 import lombok.extern.java.Log;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
@@ -16,14 +18,19 @@ import javax.annotation.PostConstruct;
 class EventService {
 
     private final ButtonRegistry buttonRegistry;
+    private final ProxyConfiguration proxyConfiguration;
+    private final ProxyWarmUpService warmUpService;
+
     private Flux<ServerSentEvent<Event>> eventStream;
     private long lastSetup = 0;
 
-    private final ProxyConfiguration proxyConfiguration;
-
-    public EventService(ProxyConfiguration proxyConfiguration, ButtonRegistry buttonRegistry) {
+    @Autowired
+    public EventService(ProxyConfiguration proxyConfiguration,
+                        ButtonRegistry buttonRegistry,
+                        ProxyWarmUpService warmUpService) {
         this.proxyConfiguration = proxyConfiguration;
         this.buttonRegistry = buttonRegistry;
+        this.warmUpService = warmUpService;
     }
 
     @PostConstruct
@@ -47,6 +54,7 @@ class EventService {
                 .bodyToFlux(type);
 
         stream.subscribe(event -> onEvent(event.data()), e -> recreate(stream), () -> recreate(stream));
+        warmUpService.preheat();
         this.eventStream = stream;
     }
 
