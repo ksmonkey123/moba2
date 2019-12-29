@@ -14,3 +14,8 @@ spring:
   datasource:
     url: jdbc:sqlite:persistence.db
     driver-class-name: org.sqlite.JDBC
+
+control:
+  path-store:
+    save-timeout: 5000
+
