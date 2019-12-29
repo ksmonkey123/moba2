@@ -2,7 +2,6 @@ package ch.awae.moba2.persistence;
 
 import ch.awae.moba2.path.Path;
 import ch.awae.moba2.path.PathProvider;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,11 +9,13 @@ import javax.annotation.PostConstruct;
 import java.util.Collection;
 import java.util.Optional;
 import java.util.Set;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Log
 @Service
 public class PathPersistenceService {
+
+    private final static Logger log = Logger.getLogger(PathPersistenceService.class.getName());
 
     private final PersistenceSlotRepository repository;
     private final PathProvider pathProvider;
@@ -40,13 +41,12 @@ public class PathPersistenceService {
 
     public void persistPaths(int slotId, Collection<Path> paths) {
         PersistenceSlot slot = repository.findBySlotId(slotId).orElseGet(() -> new PersistenceSlot(slotId));
-
         slot.getPaths().clear();
 
-        paths.stream()
+        slot.getPaths().addAll(paths.stream()
                 .filter(path -> !path.isClear())
                 .map(PersistedPath::new)
-                .collect(Collectors.toCollection(slot::getPaths));
+                .collect(Collectors.toSet()));
 
         repository.saveAndFlush(slot);
     }
@@ -55,5 +55,6 @@ public class PathPersistenceService {
     public void warmUp() {
         log.info("preheating database");
         repository.findBySlotId(0);
+        log.info("database preheated");
     }
 }

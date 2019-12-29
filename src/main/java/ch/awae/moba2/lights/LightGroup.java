@@ -1,12 +1,12 @@
 package ch.awae.moba2.lights;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 class LightGroup implements Light {
 
     private final Light[] lights;
 
+    LightGroup(Light[] lights) {
+        this.lights = lights;
+    }
 
     @Override
     public void enable() {

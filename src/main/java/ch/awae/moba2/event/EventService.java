@@ -1,9 +1,8 @@
 package ch.awae.moba2.event;
 
 import ch.awae.moba2.buttons.ButtonRegistry;
-import ch.awae.moba2.command.ProxyWarmUpService;
+import ch.awae.moba2.command.CommandClient;
 import ch.awae.moba2.config.ProxyConfiguration;
-import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.codec.ServerSentEvent;
@@ -12,14 +11,17 @@ import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
 
 import javax.annotation.PostConstruct;
+import java.util.Objects;
+import java.util.logging.Logger;
 
-@Log
 @Service
 class EventService {
 
+    private final static Logger log = Logger.getLogger(EventService.class.getName());
+
     private final ButtonRegistry buttonRegistry;
     private final ProxyConfiguration proxyConfiguration;
-    private final ProxyWarmUpService warmUpService;
+    private final CommandClient commandClient;
 
     private Flux<ServerSentEvent<Event>> eventStream;
     private long lastSetup = 0;
@@ -27,10 +29,10 @@ class EventService {
     @Autowired
     public EventService(ProxyConfiguration proxyConfiguration,
                         ButtonRegistry buttonRegistry,
-                        ProxyWarmUpService warmUpService) {
+                        CommandClient commandClient) {
         this.proxyConfiguration = proxyConfiguration;
         this.buttonRegistry = buttonRegistry;
-        this.warmUpService = warmUpService;
+        this.commandClient = commandClient;
     }
 
     @PostConstruct
@@ -54,7 +56,7 @@ class EventService {
                 .bodyToFlux(type);
 
         stream.subscribe(event -> onEvent(event.data()), e -> recreate(stream), () -> recreate(stream));
-        warmUpService.preheat();
+        commandClient.preheat();
         this.eventStream = stream;
     }
 
@@ -79,7 +81,12 @@ class EventService {
     }
 
     private void onEvent(Event event) {
-        buttonRegistry.setButtons(event.getSector(), event.getInput());
+        if (event != null) {
+            log.fine("received event: " + event);
+            buttonRegistry.setButtons(event.getSector(), event.getInput());
+        } else {
+            log.warning("received a null event!");
+        }
     }
 
 }

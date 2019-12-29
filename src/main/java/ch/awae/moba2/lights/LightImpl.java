@@ -1,12 +1,15 @@
 package ch.awae.moba2.lights;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 class LightImpl implements Light {
 
     private final int chip, pin;
     private final LightModel model;
+
+    LightImpl(int chip, int pin, LightModel model) {
+        this.chip = chip;
+        this.pin = pin;
+        this.model = model;
+    }
 
     @Override
     public void enable() {
