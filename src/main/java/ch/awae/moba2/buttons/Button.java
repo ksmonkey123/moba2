@@ -2,14 +2,18 @@ package ch.awae.moba2.buttons;
 
 import ch.awae.moba2.Sector;
 import ch.awae.utils.logic.Logic;
-import lombok.RequiredArgsConstructor;
 
-@RequiredArgsConstructor
 final class Button implements Logic {
 
     private final ButtonRegistry registry;
     private final Sector sector;
     private final int mask;
+
+    Button(ButtonRegistry registry, Sector sector, int mask) {
+        this.registry = registry;
+        this.sector = sector;
+        this.mask = mask;
+    }
 
     @Override
     public boolean evaluate() {

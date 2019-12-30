@@ -1,16 +1,19 @@
 package ch.awae.moba2;
 
-import lombok.RequiredArgsConstructor;
-
-@RequiredArgsConstructor
 public enum Sector {
-    BOTTOM(0),
-    LEFT(1),
-    RIGHT(2),
-    CENTER(3),
-    LIGHTS(4);
+    BOTTOM(0, true),
+    LEFT(1, true),
+    RIGHT(2, true),
+    CENTER(3, true),
+    LIGHTS(4, false);
 
     public final int id;
+    public final boolean switchSector;
+
+    Sector(int id, boolean switchSector) {
+        this.id = id;
+        this.switchSector = switchSector;
+    }
 
     public static Sector getById(int id) {
         for (Sector sector : Sector.values()) {

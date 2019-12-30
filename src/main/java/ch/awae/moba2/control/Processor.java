@@ -1,6 +1,6 @@
 package ch.awae.moba2.control;
 
-public interface Controller {
+public interface Processor {
 
     void tick();
 

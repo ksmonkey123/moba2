@@ -1,6 +1,7 @@
 package ch.awae.moba2.lights;
 
-import ch.awae.moba2.config.YamlPropertiesLoader;
+import ch.awae.moba2.config.YamlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,13 +17,14 @@ public class LightProvider {
     private final LightModel model;
     private final Properties properties;
 
-    public LightProvider(LightModel model, YamlPropertiesLoader loader) throws IOException {
+    @Autowired
+    public LightProvider(LightModel model, YamlLoader loader) throws IOException {
         this.model = model;
         this.properties = loader.load("lights.yml");
     }
 
     public Light getLight(int chip, int pin) {
-        return new LightImpl(chip, pin, model);
+        return new LightProxy("#" + chip + "_" + pin, new LightImpl(chip, pin, model));
     }
 
     public Light getLight(String id) {
@@ -33,9 +35,9 @@ public class LightProvider {
                 .flatMap(this::createLights)
                 .collect(Collectors.toList());
         if (lights.size() < 2) {
-            return lights.get(0);
+            return new LightProxy(id, lights.get(0));
         }
-        return new LightGroup(lights.toArray(new Light[0]));
+        return new LightProxy(id, new LightGroup(lights.toArray(new Light[0])));
     }
 
     private Stream<Light> createLights(String property) {

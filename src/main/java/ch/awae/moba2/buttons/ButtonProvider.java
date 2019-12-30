@@ -1,9 +1,10 @@
 package ch.awae.moba2.buttons;
 
 import ch.awae.moba2.Sector;
-import ch.awae.moba2.config.YamlPropertiesLoader;
+import ch.awae.moba2.config.YamlLoader;
 import ch.awae.utils.logic.Logic;
 import ch.awae.utils.logic.LogicGroup;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,7 +17,8 @@ public class ButtonProvider {
     private final ButtonRegistry registry;
     private final Properties properties;
 
-    public ButtonProvider(YamlPropertiesLoader loader, ButtonRegistry registry) throws IOException {
+    @Autowired
+    public ButtonProvider(YamlLoader loader, ButtonRegistry registry) throws IOException {
         this.registry = registry;
         this.properties = loader.load("buttons.yml");
     }

@@ -2,7 +2,8 @@ package ch.awae.moba2.path;
 
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.Utils;
-import ch.awae.moba2.config.YamlPropertiesLoader;
+import ch.awae.moba2.config.YamlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -14,8 +15,9 @@ public class PathProvider {
 
     private final HashMap<String, Path> path_map = new HashMap<>();
 
-    private PathProvider(YamlPropertiesLoader yamlPropertiesLoader) throws IOException {
-        loadPredefinedPaths(yamlPropertiesLoader.load("paths.yml"));
+    @Autowired
+    private PathProvider(YamlLoader yamlLoader) throws IOException {
+        loadPredefinedPaths(yamlLoader.load("paths.yml"));
     }
 
     public Path getPath(String key) {

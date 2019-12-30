@@ -1,20 +1,26 @@
 package ch.awae.moba2.path;
 
+import ch.awae.moba2.LogHelper;
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.command.CommandClient;
 import ch.awae.moba2.command.SwitchCommand;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Component
 public class PathRegistry {
 
+    private final static Logger LOG = LogHelper.getLogger();
+
     private final CommandClient commandClient;
     private ArrayList<Path> paths = new ArrayList<>();
 
+    @Autowired
     public PathRegistry(CommandClient commandClient) {
         this.commandClient = commandClient;
     }
@@ -40,11 +46,14 @@ public class PathRegistry {
 
     public void register(Path path) {
         if (this.paths.contains(path)) {
+            LOG.fine("path " + path + " is already registered!");
             return;
         }
+        LOG.info("registering path " + path);
         for (int index = 0; index < this.paths.size(); index++) {
             Path p = this.paths.get(index);
             if (path.collides(p)) {
+                LOG.fine("removing colliding path " + p);
                 this.paths.remove(index);
                 index--;
             }

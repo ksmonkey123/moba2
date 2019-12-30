@@ -9,7 +9,7 @@ public class SectorButtonProvider {
     private final ButtonProvider provider;
     private final Sector sector;
 
-    public SectorButtonProvider(ButtonProvider provider, Sector sector) {
+    SectorButtonProvider(ButtonProvider provider, Sector sector) {
         this.provider = provider;this.sector = sector;
     }
 

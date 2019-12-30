@@ -1,14 +1,10 @@
 package ch.awae.moba2.persistence;
 
 import ch.awae.moba2.path.Path;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.persistence.Embeddable;
 
-@Data
 @Embeddable
-@NoArgsConstructor
 class PersistedPath {
 
     private String title;
@@ -17,4 +13,9 @@ class PersistedPath {
         this.title = path.getTitle();
     }
 
+    PersistedPath() {}
+
+    String getTitle() {
+        return title;
+    }
 }

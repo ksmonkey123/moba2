@@ -2,14 +2,15 @@ package ch.awae.moba2.control.impl;
 
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.buttons.ButtonProvider;
-import ch.awae.moba2.control.Controller;
+import ch.awae.moba2.control.Processor;
 import ch.awae.moba2.lights.Light;
 import ch.awae.moba2.lights.LightProvider;
 import ch.awae.utils.logic.Logic;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class StepThroughLightController implements Controller {
+public class StepThroughLightProcessor implements Processor {
 
     private final Logic start, previous, next;
     private final LightProvider lightProvider;
@@ -17,7 +18,8 @@ public class StepThroughLightController implements Controller {
     private int id = 0;
     private Light current = null;
 
-    public StepThroughLightController(LightProvider lightProvider, ButtonProvider buttonProvider) {
+    @Autowired
+    public StepThroughLightProcessor(LightProvider lightProvider, ButtonProvider buttonProvider) {
         this.lightProvider = lightProvider;
 
         this.start = buttonProvider.getButton(Sector.LIGHTS, "light[3]").edge();

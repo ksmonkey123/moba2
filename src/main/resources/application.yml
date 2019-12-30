@@ -9,13 +9,12 @@ spring:
     database-platform: ch.awae.moba2.SQLiteDialect
     hibernate:
       ddl-auto: update
-    show-sql: true
+    show-sql: false
 
   datasource:
     url: jdbc:sqlite:persistence.db
     driver-class-name: org.sqlite.JDBC
 
-control:
+processor:
   path-store:
     save-timeout: 5000
-
