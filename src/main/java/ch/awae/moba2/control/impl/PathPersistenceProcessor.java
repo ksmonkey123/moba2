@@ -2,18 +2,17 @@ package ch.awae.moba2.control.impl;
 
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.buttons.ButtonProvider;
-import ch.awae.moba2.config.control.PathStoreConfiguration;
-import ch.awae.moba2.control.Controller;
+import ch.awae.moba2.config.processor.PathStoreConfiguration;
+import ch.awae.moba2.control.Processor;
 import ch.awae.moba2.logic.Timeout;
 import ch.awae.moba2.path.PathRegistry;
 import ch.awae.moba2.persistence.PathPersistenceService;
 import ch.awae.utils.logic.Logic;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PathPersistenceController implements Controller {
+public class PathPersistenceProcessor implements Processor {
 
     private final PathPersistenceService persistenceService;
     private final PathRegistry pathRegistry;
@@ -24,7 +23,7 @@ public class PathPersistenceController implements Controller {
     private final Timeout saveTimeout;
 
     @Autowired
-    public PathPersistenceController(
+    public PathPersistenceProcessor(
             PathPersistenceService persistenceService,
             PathRegistry pathRegistry,
             ButtonProvider buttonProvider,

@@ -1,13 +1,17 @@
-package ch.awae.moba2.config.control;
+package ch.awae.moba2.config.processor;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.Positive;
+
+@Validated
 @Configuration
-@ConfigurationProperties("control.path-store")
+@ConfigurationProperties("processor.path-store")
 public class PathStoreConfiguration {
 
-    private long saveTimeout;
+    private @Positive long saveTimeout;
 
     public long getSaveTimeout() {
         return saveTimeout;

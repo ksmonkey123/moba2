@@ -2,6 +2,7 @@ package ch.awae.moba2.config;
 
 import org.hibernate.validator.constraints.URL;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
 
@@ -9,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
 @Validated
-@Component
+@Configuration
 @ConfigurationProperties("proxy")
 public class ProxyConfiguration {
 

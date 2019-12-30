@@ -3,6 +3,7 @@ package ch.awae.moba2.path;
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.command.CommandClient;
 import ch.awae.moba2.command.SwitchCommand;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ public class PathRegistry {
     private final CommandClient commandClient;
     private ArrayList<Path> paths = new ArrayList<>();
 
+    @Autowired
     public PathRegistry(CommandClient commandClient) {
         this.commandClient = commandClient;
     }

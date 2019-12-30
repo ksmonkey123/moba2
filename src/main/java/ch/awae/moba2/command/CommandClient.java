@@ -2,6 +2,7 @@ package ch.awae.moba2.command;
 
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.config.ProxyConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,6 +17,7 @@ public class CommandClient {
     private final RestTemplate http;
     private final ProxyConfiguration configuration;
 
+    @Autowired
     public CommandClient(RestTemplate http, ProxyConfiguration configuration) {
         this.http = http;
         this.configuration = configuration;

@@ -1,6 +1,7 @@
 package ch.awae.moba2.lights;
 
-import ch.awae.moba2.config.YamlPropertiesLoader;
+import ch.awae.moba2.config.YamlLoader;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -16,7 +17,8 @@ public class LightProvider {
     private final LightModel model;
     private final Properties properties;
 
-    public LightProvider(LightModel model, YamlPropertiesLoader loader) throws IOException {
+    @Autowired
+    public LightProvider(LightModel model, YamlLoader loader) throws IOException {
         this.model = model;
         this.properties = loader.load("lights.yml");
     }

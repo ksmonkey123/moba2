@@ -3,19 +3,21 @@ package ch.awae.moba2.control.impl;
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.buttons.ButtonProvider;
 import ch.awae.moba2.buttons.SectorButtonProvider;
-import ch.awae.moba2.control.Controller;
+import ch.awae.moba2.control.Processor;
 import ch.awae.moba2.lights.Light;
 import ch.awae.moba2.lights.LightProvider;
 import ch.awae.utils.logic.Logic;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class LightController implements Controller {
+public class LightProcessor implements Processor {
 
     private Light all;
     private Logic allOff, allOn;
 
-    public LightController(ButtonProvider buttonProvider, LightProvider provider) {
+    @Autowired
+    public LightProcessor(ButtonProvider buttonProvider, LightProvider provider) {
         SectorButtonProvider buttons = buttonProvider.sector(Sector.LIGHTS);
 
         all = provider.getLight("all");

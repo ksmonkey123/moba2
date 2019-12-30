@@ -1,14 +1,14 @@
 package ch.awae.moba2.buttons;
 
 import ch.awae.moba2.Sector;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 public class ButtonRegistry {
 
     private volatile int[] sectors = new int[Sector.values().length];
 
-    public boolean isPressed(Sector sector, int mask) {
+    boolean isPressed(Sector sector, int mask) {
         return (sectors[sector.ordinal()] & mask) > 0;
     }
 

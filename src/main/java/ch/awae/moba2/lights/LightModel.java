@@ -2,12 +2,14 @@ package ch.awae.moba2.lights;
 
 import ch.awae.moba2.command.CommandClient;
 import ch.awae.moba2.command.LightCommand;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
 
-@Service
+@Component
 public class LightModel {
 
     private volatile boolean[][] pins = new boolean[16][8];
@@ -15,6 +17,7 @@ public class LightModel {
 
     private final CommandClient client;
 
+    @Autowired
     public LightModel(CommandClient client) {
         this.client = client;
     }

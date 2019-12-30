@@ -4,14 +4,14 @@ import org.springframework.boot.env.YamlPropertySourceLoader;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Properties;
 
-@Component
-public final class YamlPropertiesLoader {
+@Service
+public final class YamlLoader {
 
     public Properties load(String file) throws IOException {
         List<PropertySource<?>> yml = new YamlPropertySourceLoader().load(null, new ClassPathResource(file));
