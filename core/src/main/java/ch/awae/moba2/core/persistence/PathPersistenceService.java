@@ -1,6 +1,6 @@
 package ch.awae.moba2.core.persistence;
 
-import ch.awae.moba2.core.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.core.path.Path;
 import ch.awae.moba2.core.path.PathProvider;
 import org.springframework.beans.factory.annotation.Autowired;

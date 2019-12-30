@@ -63,7 +63,12 @@
         <dependency>
             <groupId>ch.awae</groupId>
             <artifactId>awaeUtils</artifactId>
-            <version>${awaeUtils.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.awae</groupId>
+            <artifactId>moba-common</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
 
     </dependencies>

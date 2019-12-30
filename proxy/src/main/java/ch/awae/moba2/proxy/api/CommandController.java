@@ -1,6 +1,6 @@
 package ch.awae.moba2.proxy.api;
 
-import ch.awae.moba2.proxy.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.proxy.Sector;
 import ch.awae.moba2.proxy.lights.LightCommand;
 import ch.awae.moba2.proxy.model.ModelProxy;

@@ -1,6 +1,6 @@
 package ch.awae.moba2.proxy.model;
 
-import ch.awae.moba2.proxy.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.proxy.Sector;
 import ch.awae.moba2.proxy.event.EmitterRepository;
 import ch.awae.moba2.proxy.event.Event;

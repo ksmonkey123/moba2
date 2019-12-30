@@ -1,5 +1,6 @@
 package ch.awae.moba2.core.control.impl;
 
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.core.Sector;
 import ch.awae.moba2.core.buttons.ButtonProvider;
 import ch.awae.moba2.core.config.processor.PathStoreConfiguration;
@@ -11,8 +12,12 @@ import ch.awae.utils.logic.Logic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.logging.Logger;
+
 @Component
 public class PathPersistenceProcessor implements Processor {
+
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final PathPersistenceService persistenceService;
     private final PathRegistry pathRegistry;
@@ -63,10 +68,12 @@ public class PathPersistenceProcessor implements Processor {
     }
 
     private void handleRead(int slotId) {
+        LOG.info("loading state from slot " + slotId);
         persistenceService.getPersistedPaths(slotId).ifPresent(pathRegistry::registerAll);
     }
 
     private void handleSave(int slotId) {
+        LOG.info("storing current state into slot " + slotId);
         persistenceService.persistPaths(slotId, pathRegistry.getAllPaths());
     }
 

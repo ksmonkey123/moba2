@@ -1,6 +1,6 @@
 package ch.awae.moba2.core.control;
 
-import ch.awae.moba2.core.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.core.lights.LightModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;

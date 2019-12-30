@@ -1,6 +1,6 @@
 package ch.awae.moba2.core.lights;
 
-import ch.awae.moba2.core.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 
 import java.util.logging.Logger;
 

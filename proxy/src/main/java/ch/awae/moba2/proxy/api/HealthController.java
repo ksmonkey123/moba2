@@ -1,7 +1,7 @@
 package ch.awae.moba2.proxy.api;
 
 import ch.awae.moba2.proxy.AppProperties;
-import ch.awae.moba2.proxy.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.proxy.event.EventService;
 import ch.awae.moba2.proxy.spi.SpiTransmissionController;
 import org.springframework.web.bind.annotation.GetMapping;

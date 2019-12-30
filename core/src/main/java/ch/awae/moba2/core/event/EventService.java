@@ -1,6 +1,6 @@
 package ch.awae.moba2.core.event;
 
-import ch.awae.moba2.core.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.core.buttons.ButtonRegistry;
 import ch.awae.moba2.core.command.CommandClient;
 import ch.awae.moba2.core.config.ProxyConfiguration;

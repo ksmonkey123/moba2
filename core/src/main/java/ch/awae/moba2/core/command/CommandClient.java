@@ -1,6 +1,6 @@
 package ch.awae.moba2.core.command;
 
-import ch.awae.moba2.core.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import ch.awae.moba2.core.Sector;
 import ch.awae.moba2.core.config.ProxyConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package ch.awae.moba2.core;
+package ch.awae.moba2.common;
 
 import java.util.logging.Logger;
 

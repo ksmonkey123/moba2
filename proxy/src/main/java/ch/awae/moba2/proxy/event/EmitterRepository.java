@@ -1,6 +1,6 @@
 package ch.awae.moba2.proxy.event;
 
-import ch.awae.moba2.proxy.LogHelper;
+import ch.awae.moba2.common.LogHelper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
