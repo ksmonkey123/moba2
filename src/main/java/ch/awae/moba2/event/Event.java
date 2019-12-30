@@ -16,6 +16,22 @@ class Event {
         return input;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setTimestamp(long timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    public void setSector(Sector sector) {
+        this.sector = sector;
+    }
+
+    public void setInput(int input) {
+        this.input = input;
+    }
+
     @Override
     public String toString() {
         return "Event{" +
