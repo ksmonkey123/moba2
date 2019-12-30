@@ -56,12 +56,7 @@ public final class Path {
 
     @Override
     public String toString() {
-        return "Path{" +
-                "title='" + title + '\'' +
-                ", sector=" + sector +
-                ", mask=" + mask +
-                ", data=" + data +
-                '}';
+        return sector.name() + "/" + title;
     }
 
 }
