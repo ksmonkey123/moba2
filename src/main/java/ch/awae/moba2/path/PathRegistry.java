@@ -15,7 +15,7 @@ import java.util.logging.Logger;
 @Component
 public class PathRegistry {
 
-    private final static Logger logger = LogHelper.getLogger();
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final CommandClient commandClient;
     private ArrayList<Path> paths = new ArrayList<>();
@@ -46,14 +46,14 @@ public class PathRegistry {
 
     public void register(Path path) {
         if (this.paths.contains(path)) {
-            logger.fine("path " + path + " is already registered!");
+            LOG.fine("path " + path + " is already registered!");
             return;
         }
-        logger.info("registering path " + path);
+        LOG.info("registering path " + path);
         for (int index = 0; index < this.paths.size(); index++) {
             Path p = this.paths.get(index);
             if (path.collides(p)) {
-                logger.fine("removing colliding path " + p);
+                LOG.fine("removing colliding path " + p);
                 this.paths.remove(index);
                 index--;
             }

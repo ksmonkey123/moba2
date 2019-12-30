@@ -1,5 +1,6 @@
 package ch.awae.moba2.command;
 
+import ch.awae.moba2.LogHelper;
 import ch.awae.moba2.Sector;
 import ch.awae.moba2.config.ProxyConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ import java.util.logging.Logger;
 @Service
 public class CommandClient {
 
-    private static final Logger log = Logger.getLogger(CommandClient.class.getName());
+    private static final Logger LOG = LogHelper.getLogger();
 
     private final RestTemplate http;
     private final ProxyConfiguration configuration;
@@ -24,24 +25,25 @@ public class CommandClient {
     }
 
     public void sendSwitchCommand(Sector sector, SwitchCommand switchCommand) {
-        log.fine(String.format("sending switch command to sector %s: %s", sector, switchCommand));
+        LOG.fine(String.format("sending switch command to sector %s: %s", sector, switchCommand));
         http.postForObject(configuration.getHost() + "switch/" + sector.name(), switchCommand, Object.class);
     }
 
     public void sendLightCommand(LightCommand lightCommand) {
-        log.fine(String.format("sending light command: %s", lightCommand));
+        LOG.fine(String.format("sending light command: %s", lightCommand));
         http.postForObject(configuration.getHost() + "lights", lightCommand, Object.class);
     }
 
     public void preheat() {
-        log.info("preheating proxy");
+        LOG.info("preheating proxy");
         try {
             for (int i = 0; i < 4; i++) {
                 doPreheat();
             }
-            log.info("proxy preheated");
+            LOG.info("proxy preheated");
         } catch(Exception e) {
-            log.log(Level.WARNING, "proxy preheating failed", e);
+            LOG.log(Level.WARNING, "proxy preheating failed: " + e.toString());
+            LOG.log(Level.FINE, e.toString(), e);
         }
     }
 

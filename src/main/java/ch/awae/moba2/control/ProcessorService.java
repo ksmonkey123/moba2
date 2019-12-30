@@ -1,5 +1,6 @@
 package ch.awae.moba2.control;
 
+import ch.awae.moba2.LogHelper;
 import ch.awae.moba2.lights.LightModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -13,7 +14,7 @@ import java.util.logging.Logger;
 @Service
 public class ProcessorService {
 
-    private final static Logger log = Logger.getLogger(ProcessorService.class.getName());
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final LightModel lightModel;
     private final List<Processor> processors;
@@ -23,9 +24,9 @@ public class ProcessorService {
         this.lightModel = lightModel;
         this.processors = new ArrayList<>(context.getBeansOfType(Processor.class).values());
 
-        log.info("loaded  " + this.processors.size() + " processors");
+        LOG.info("loaded  " + this.processors.size() + " processors");
         for (Processor processor : this.processors) {
-            log.fine(" * " + processor.getClass());
+            LOG.fine(" * " + processor.getClass());
         }
     }
 

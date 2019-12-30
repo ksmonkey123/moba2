@@ -6,7 +6,7 @@ import java.util.logging.Logger;
 
 class LightProxy implements Light {
 
-    private final static Logger logger = LogHelper.getLogger();
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final String id;
     private final Light light;
@@ -19,19 +19,19 @@ class LightProxy implements Light {
 
     @Override
     public void enable() {
-        logger.info("enabling light " + id);
+        LOG.info("enabling light " + id);
         light.enable();
     }
 
     @Override
     public void disable() {
-        logger.info("disabling light " + id);
+        LOG.info("disabling light " + id);
         light.disable();
     }
 
     @Override
     public void toggle() {
-        logger.info("toggling light " + id);
+        LOG.info("toggling light " + id);
         light.toggle();
     }
 

@@ -1,5 +1,6 @@
 package ch.awae.moba2.event;
 
+import ch.awae.moba2.LogHelper;
 import ch.awae.moba2.buttons.ButtonRegistry;
 import ch.awae.moba2.command.CommandClient;
 import ch.awae.moba2.config.ProxyConfiguration;
@@ -9,15 +10,15 @@ import org.springframework.http.codec.ServerSentEvent;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 import javax.annotation.PostConstruct;
-import java.util.Objects;
 import java.util.logging.Logger;
 
 @Service
 class EventService {
 
-    private final static Logger log = Logger.getLogger(EventService.class.getName());
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final ButtonRegistry buttonRegistry;
     private final ProxyConfiguration proxyConfiguration;
@@ -43,7 +44,7 @@ class EventService {
             throw new IllegalStateException("can not initialize while a stream is present");
         }
 
-        log.info("initialising new SSE event stream");
+        LOG.info("initialising new SSE event stream");
         WebClient client = WebClient.create(proxyConfiguration.getHost());
 
         ParameterizedTypeReference<ServerSentEvent<Event>> type =
@@ -53,6 +54,9 @@ class EventService {
         Flux<ServerSentEvent<Event>> stream = client.get()
                 .uri("/events")
                 .retrieve()
+                .onRawStatus(x -> true, resp -> {
+                    return Mono.error(new IllegalArgumentException());
+                })
                 .bodyToFlux(type);
 
         stream.subscribe(event -> onEvent(event.data()), e -> recreate(stream), () -> recreate(stream));
@@ -82,10 +86,10 @@ class EventService {
 
     private void onEvent(Event event) {
         if (event != null) {
-            log.fine("received event: " + event);
+            LOG.fine("received event: " + event);
             buttonRegistry.setButtons(event.getSector(), event.getInput());
         } else {
-            log.warning("received a null event!");
+            LOG.warning("received a null event!");
         }
     }
 

@@ -1,5 +1,6 @@
 package ch.awae.moba2.persistence;
 
+import ch.awae.moba2.LogHelper;
 import ch.awae.moba2.path.Path;
 import ch.awae.moba2.path.PathProvider;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 @Service
 public class PathPersistenceService {
 
-    private final static Logger log = Logger.getLogger(PathPersistenceService.class.getName());
+    private final static Logger LOG = LogHelper.getLogger();
 
     private final PersistenceSlotRepository repository;
     private final PathProvider pathProvider;
@@ -53,8 +54,8 @@ public class PathPersistenceService {
 
     @PostConstruct
     public void warmUp() {
-        log.info("preheating database");
+        LOG.info("preheating database");
         repository.findBySlotId(0);
-        log.info("database preheated");
+        LOG.info("database preheated");
     }
 }
