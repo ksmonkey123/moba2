@@ -1,0 +1,21 @@
+server:
+  port: 8088
+
+spring:
+  mvc:
+    async:
+      request-timeout: 300000 # SSE stream TTL: 5 minutes
+
+app:
+  artifactId: @project.artifactId@
+  version: @project.version@
+
+spi:
+  speed: 61000
+  magic-number: 0x69
+  host-select-delay: 150000
+  max-restore: 100
+
+display:
+  stealth-mode-fade-out: 1000
+  command-flash-duration: 50
