@@ -3,8 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
-/src/main/java/ch/awae/moba
-/src/main/resources/*.properties
 
 ### STS ###
 .apt_generated
