@@ -54,9 +54,6 @@ class EventService {
         Flux<ServerSentEvent<Event>> stream = client.get()
                 .uri("/events")
                 .retrieve()
-                .onRawStatus(x -> true, resp -> {
-                    return Mono.error(new IllegalArgumentException());
-                })
                 .bodyToFlux(type);
 
         stream.subscribe(event -> onEvent(event.data()), e -> recreate(stream), () -> recreate(stream));
@@ -87,7 +84,7 @@ class EventService {
     private void onEvent(Event event) {
         if (event != null) {
             LOG.fine("received event: " + event);
-            buttonRegistry.setButtons(event.getSector(), event.getInput());
+            buttonRegistry.setButtons(event.sector, event.input);
         } else {
             LOG.warning("received a null event!");
         }
