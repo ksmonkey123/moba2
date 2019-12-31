@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "running maven build..."
-mvn -U clean install
+mvn -U clean package
 echo "done!"
 
 echo "installing on host..."

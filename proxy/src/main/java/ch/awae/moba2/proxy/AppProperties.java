@@ -1,15 +1,20 @@
 package ch.awae.moba2.proxy;
 
+import ch.awae.moba2.common.LogHelper;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.annotation.Validated;
 
+import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
+import java.util.logging.Logger;
 
 @Validated
 @Configuration
 @ConfigurationProperties("app")
 public class AppProperties {
+
+    private final static Logger LOG = LogHelper.getLogger();
 
     private @NotNull String artifactId;
     private @NotNull String version;
@@ -30,4 +35,8 @@ public class AppProperties {
         this.version = version;
     }
 
+    @PostConstruct
+    public void logInfo() {
+        LOG.info("launched " + artifactId + " v" + version);
+    }
 }
