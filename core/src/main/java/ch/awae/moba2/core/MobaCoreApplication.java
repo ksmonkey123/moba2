@@ -8,10 +8,10 @@ import org.springframework.web.client.RestTemplate;
 
 @EnableScheduling
 @SpringBootApplication
-public class Moba2Application {
+public class MobaCoreApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Moba2Application.class, args);
+        SpringApplication.run(MobaCoreApplication.class, args);
     }
 
     @Bean

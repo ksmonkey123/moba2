@@ -4,8 +4,13 @@ server:
 proxy:
   host: http://localhost:8088/
 
+app:
+  artifactId: @project.artifactId@
+  version: @project.version@_@buildNumber@
+
 spring:
   jpa:
+    open-in-view: false
     database-platform: ch.awae.moba2.core.SQLiteDialect
     hibernate:
       ddl-auto: update

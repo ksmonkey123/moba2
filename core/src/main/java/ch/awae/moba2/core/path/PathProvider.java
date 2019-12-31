@@ -1,7 +1,7 @@
 package ch.awae.moba2.core.path;
 
+import ch.awae.moba2.common.Utils;
 import ch.awae.moba2.core.Sector;
-import ch.awae.moba2.core.Utils;
 import ch.awae.moba2.core.config.YamlLoader;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
