@@ -5,11 +5,14 @@ import ch.awae.moba2.core.Sector;
 import ch.awae.moba2.core.config.ProxyConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.client.RestTemplate;
 
+import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+@Validated
 @Service
 public class CommandClient {
 
@@ -24,12 +27,12 @@ public class CommandClient {
         this.configuration = configuration;
     }
 
-    public void sendSwitchCommand(Sector sector, SwitchCommand switchCommand) {
+    public void sendSwitchCommand(@NotNull Sector sector, @NotNull SwitchCommand switchCommand) {
         LOG.fine(String.format("sending switch command to sector %s: %s", sector, switchCommand));
         http.postForObject(configuration.getHost() + "switch/" + sector.name(), switchCommand, Object.class);
     }
 
-    public void sendLightCommand(LightCommand lightCommand) {
+    public void sendLightCommand(@NotNull LightCommand lightCommand) {
         LOG.fine(String.format("sending light command: %s", lightCommand));
         http.postForObject(configuration.getHost() + "lights", lightCommand, Object.class);
     }

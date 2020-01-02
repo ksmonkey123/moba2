@@ -2,12 +2,15 @@ package ch.awae.moba2.core.lights;
 
 import ch.awae.moba2.core.command.CommandClient;
 import ch.awae.moba2.core.command.LightCommand;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.ArrayList;
 import java.util.List;
 
+@Validated
 @Component
 public class LightModel {
 
@@ -21,7 +24,10 @@ public class LightModel {
         this.client = client;
     }
 
-    public void setPin(int chip, int pin, boolean enabled) {
+    public void setPin(
+            @Range(min = 0, max = 15) int chip,
+            @Range(min = 0, max = 7) int pin,
+            boolean enabled) {
         boolean previous = pins[chip][pin];
         if (previous != enabled) {
             pins[chip][pin] = enabled;
@@ -29,7 +35,9 @@ public class LightModel {
         }
     }
 
-    public boolean getPin(int chip, int pin) {
+    public boolean getPin(
+            @Range(min = 0, max = 15) int chip,
+            @Range(min = 0, max = 7) int pin) {
         return pins[chip][pin];
     }
 

@@ -6,12 +6,16 @@ import ch.awae.moba2.core.command.CommandClient;
 import ch.awae.moba2.core.command.SwitchCommand;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
+@Validated
 @Component
 public class PathRegistry {
 
@@ -38,13 +42,13 @@ public class PathRegistry {
         commandClient.sendSwitchCommand(sector, new SwitchCommand(command, display));
     }
 
-    public void register(Path... paths) {
+    public void register(@NotEmpty Path... paths) {
         for (Path path : paths) {
             register(path);
         }
     }
 
-    public void register(Path path) {
+    public void register(@NotNull Path path) {
         if (this.paths.contains(path)) {
             LOG.fine("path " + path + " is already registered!");
             return;
@@ -66,7 +70,7 @@ public class PathRegistry {
         return new ArrayList<>(paths);
     }
 
-    private List<Path> getPaths(Sector sector) {
+    private List<Path> getPaths(@NotNull Sector sector) {
         List<Path> result = new ArrayList<>();
         for (Path p : this.paths)
             if (p.getSector() == sector)
@@ -74,7 +78,7 @@ public class PathRegistry {
         return result;
     }
 
-    public void registerAll(Collection<Path> paths) {
+    public void registerAll(@NotEmpty Collection<@NotNull Path> paths) {
         for (Path path : paths) {
             this.register(path);
         }

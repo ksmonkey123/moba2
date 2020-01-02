@@ -1,9 +1,13 @@
 package ch.awae.moba2.core.lights;
 
+import ch.awae.moba2.core.config.ProviderConfiguration;
 import ch.awae.moba2.core.config.YamlLoader;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,6 +15,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+@Validated
 @Service
 public class LightProvider {
 
@@ -18,16 +23,18 @@ public class LightProvider {
     private final Properties properties;
 
     @Autowired
-    public LightProvider(LightModel model, YamlLoader loader) throws IOException {
+    public LightProvider(LightModel model, YamlLoader loader, ProviderConfiguration config) throws IOException {
         this.model = model;
-        this.properties = loader.load("lights.yml");
+        this.properties = loader.load(config.getLight());
     }
 
-    public Light getLight(int chip, int pin) {
+    public Light getLight(
+            @Range(min = 0, max = 15) int chip,
+            @Range(min = 0, max = 7) int pin) {
         return new LightProxy("#" + chip + "_" + pin, new LightImpl(chip, pin, model));
     }
 
-    public Light getLight(String id) {
+    public Light getLight(@NotEmpty String id) {
         List<Light> lights = this.properties.stringPropertyNames()
                 .stream()
                 .filter(s -> s.startsWith(id))

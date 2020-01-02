@@ -1,16 +1,20 @@
 package ch.awae.moba2.core.buttons;
 
 import ch.awae.moba2.core.Sector;
+import ch.awae.moba2.core.config.ProviderConfiguration;
 import ch.awae.moba2.core.config.YamlLoader;
 import ch.awae.utils.logic.Logic;
 import ch.awae.utils.logic.LogicGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.io.IOException;
-import java.util.Objects;
 import java.util.Properties;
 
+@Validated
 @Service
 public class ButtonProvider {
 
@@ -18,26 +22,23 @@ public class ButtonProvider {
     private final Properties properties;
 
     @Autowired
-    public ButtonProvider(YamlLoader loader, ButtonRegistry registry) throws IOException {
+    public ButtonProvider(YamlLoader loader, ButtonRegistry registry, ProviderConfiguration config) throws IOException {
         this.registry = registry;
-        this.properties = loader.load("buttons.yml");
+        this.properties = loader.load(config.getButton());
     }
 
-    public SectorButtonProvider sector(Sector sector) {
+    public SectorButtonProvider sector(@NotNull Sector sector) {
         return new SectorButtonProvider(this, sector);
     }
 
     private int getMask(Sector sector, String id) {
-        Objects.requireNonNull(sector, "sector may not be null");
-        Objects.requireNonNull(id, "id may not be null");
-
         String value = properties.getProperty(sector.name().toLowerCase() + "." + id);
         if (value == null)
             throw new NullPointerException("no button for id '" + id + "'");
         return Integer.parseInt(value) & 0x0000ffff;
     }
 
-    public Logic getButton(Sector sector, String id) {
+    public Logic getButton(@NotNull Sector sector, @NotEmpty String id) {
         int mask = getMask(sector, id);
         // check if mask is ok (single '1'-bit)
         if ((mask & (mask - 1)) != 0)
@@ -47,7 +48,7 @@ public class ButtonProvider {
         return new Button(registry, sector, mask);
     }
 
-    public LogicGroup getGroup(Sector sector, String id) {
+    public LogicGroup getGroup(@NotNull Sector sector, @NotEmpty String id) {
         int mask = getMask(sector, id);
 
         Logic[] result = new Logic[countOnes(mask)];

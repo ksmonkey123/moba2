@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 @Validated
 @Configuration
 @ConfigurationProperties("app")
-public class AppProperties {
+public class AppConfiguration {
 
     private final static Logger LOG = LogHelper.getLogger();
 
