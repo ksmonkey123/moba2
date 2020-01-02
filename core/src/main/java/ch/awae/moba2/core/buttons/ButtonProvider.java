@@ -6,6 +6,7 @@ import ch.awae.moba2.core.config.YamlLoader;
 import ch.awae.utils.logic.Logic;
 import ch.awae.utils.logic.LogicGroup;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -19,16 +20,18 @@ import java.util.Properties;
 public class ButtonProvider {
 
     private final ButtonRegistry registry;
+    private final ApplicationContext context;
     private final Properties properties;
 
     @Autowired
-    public ButtonProvider(YamlLoader loader, ButtonRegistry registry, ProviderConfiguration config) throws IOException {
+    public ButtonProvider(YamlLoader loader, ButtonRegistry registry, ProviderConfiguration config, ApplicationContext context) throws IOException {
         this.registry = registry;
+        this.context = context;
         this.properties = loader.load(config.getButton());
     }
 
     public SectorButtonProvider sector(@NotNull Sector sector) {
-        return new SectorButtonProvider(this, sector);
+        return new SectorButtonProvider(context.getBean(ButtonProvider.class), sector);
     }
 
     private int getMask(Sector sector, String id) {
