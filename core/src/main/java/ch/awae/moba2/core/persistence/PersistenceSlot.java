@@ -3,10 +3,12 @@ package ch.awae.moba2.core.persistence;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import java.util.HashSet;
 import java.util.Optional;
-import java.util.Set;
 
 @Entity
 class PersistenceSlot {
@@ -17,17 +19,13 @@ class PersistenceSlot {
 
     private int slotId;
 
-    @ElementCollection(fetch = FetchType.EAGER)
-    private Set<PersistedPath> paths = new HashSet<>();
+    @Basic
+    private HashSet<String> paths = new HashSet<>();
 
     PersistenceSlot() {}
 
     PersistenceSlot(int slotId) {
         this.slotId = slotId;
-    }
-
-    public Set<PersistedPath> getPaths() {
-        return paths;
     }
 
     public long getId() {
@@ -36,6 +34,14 @@ class PersistenceSlot {
 
     public int getSlotId() {
         return slotId;
+    }
+
+    public HashSet<String> getPaths() {
+        return paths;
+    }
+
+    public void setPaths(HashSet<String> paths) {
+        this.paths = paths;
     }
 }
 

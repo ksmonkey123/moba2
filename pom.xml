@@ -13,10 +13,9 @@
 
     <groupId>ch.awae</groupId>
     <artifactId>moba2</artifactId>
-    <version>${revision}</version>
+    <version>0.0.1-SNAPSHOT</version>
 
     <properties>
-        <revision>0.0.1-SNAPSHOT</revision>
         <java.version>1.8</java.version>
         <awaeUtils.version>2.1.1</awaeUtils.version>
     </properties>
@@ -45,7 +44,7 @@
             <dependency>
                 <groupId>ch.awae</groupId>
                 <artifactId>moba-common</artifactId>
-                <version>${revision}</version>
+                <version>0.0.1-SNAPSHOT</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

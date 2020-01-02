@@ -16,7 +16,7 @@ public class PathProvider {
     private final HashMap<String, Path> path_map = new HashMap<>();
 
     @Autowired
-    private PathProvider(YamlLoader yamlLoader) throws IOException {
+    public PathProvider(YamlLoader yamlLoader) throws IOException {
         loadPredefinedPaths(yamlLoader.load("paths.yml"));
     }
 
