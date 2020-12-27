@@ -15,7 +15,7 @@ import javax.validation.constraints.NotNull;
 import java.io.IOException;
 import java.util.Properties;
 
-@Validated
+//@Validated
 @Service
 public class ButtonProvider {
 

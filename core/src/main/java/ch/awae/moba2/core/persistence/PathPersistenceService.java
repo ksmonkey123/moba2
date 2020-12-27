@@ -17,7 +17,7 @@ import java.util.Set;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-@Validated
+//@Validated
 @Service
 public class PathPersistenceService {
 

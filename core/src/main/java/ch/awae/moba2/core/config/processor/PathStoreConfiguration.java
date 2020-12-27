@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.Positive;
 
-@Validated
+//@Validated
 @Configuration
 @ConfigurationProperties("processor.path-store")
 public class PathStoreConfiguration {

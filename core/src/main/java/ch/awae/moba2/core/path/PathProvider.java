@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
-@Validated
+//@Validated
 @Service
 public class PathProvider {
 

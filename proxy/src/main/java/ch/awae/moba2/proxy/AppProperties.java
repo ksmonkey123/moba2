@@ -9,7 +9,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.constraints.NotNull;
 import java.util.logging.Logger;
 
-@Validated
+//@Validated
 @Configuration
 @ConfigurationProperties("app")
 public class AppProperties {

@@ -6,7 +6,7 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.constraints.NotNull;
 
-@Validated
+//@Validated
 @Component
 public class ButtonRegistry {
 

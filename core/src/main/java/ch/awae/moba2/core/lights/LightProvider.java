@@ -15,7 +15,7 @@ import java.util.Properties;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Validated
+//@Validated
 @Service
 public class LightProvider {
 

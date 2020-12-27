@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 
-@Validated
+//@Validated
 @Configuration
 @ConfigurationProperties("provider")
 public class ProviderConfiguration {

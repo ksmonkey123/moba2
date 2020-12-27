@@ -7,7 +7,7 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.PositiveOrZero;
 
-@Validated
+//@Validated
 @Configuration
 @ConfigurationProperties("spi")
 public class SpiConfiguration {

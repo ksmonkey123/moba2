@@ -10,7 +10,7 @@ import org.springframework.validation.annotation.Validated;
 import java.util.ArrayList;
 import java.util.List;
 
-@Validated
+//@Validated
 @Component
 public class LightModel {
 

@@ -15,7 +15,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
-@Validated
+//@Validated
 @Component
 public class PathRegistry {
 

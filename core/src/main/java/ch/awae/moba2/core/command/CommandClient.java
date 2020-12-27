@@ -12,7 +12,7 @@ import javax.validation.constraints.NotNull;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-@Validated
+//@Validated
 @Service
 public class CommandClient {
 
